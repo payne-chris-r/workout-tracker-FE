@@ -45,7 +45,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active" id="home-button"><a href="#">Home</a></li>
+            <li class="active" id="home-button"><a>Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Runs</a></li>
             <li class="dropdown">
@@ -62,8 +62,9 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-
-            <li><a><input type="button" id="logout" value="Logout" style="visibility: hidden;"></a></li>
+            <li class="navbarinputs"><input id="username" placeholder="username"></li>
+            <li class="navbarinputs"><input id="user-password" type="password" placeholder="password"></li>
+            <li><a><input type="button" id="logout" value="Logout" style="display:none;"></a></li>
             <li><a><input type="button" id="login" value="Login"></a></li>
             <li><a><input type="button" id="user-create" value="Create User"></a></li>
           </ul>
@@ -89,12 +90,12 @@
               <h1>Learn to Run. Live to run. Love to run.</h1>
               <p>Introducing a better way to track your workouts.</p>
               <p>Click below to get started.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+              <p><a class="btn btn-lg btn-primary"  role="button">Sign up today</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+          <img class="second-slide" src="images/ddeckNPcropped.jpg" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
               <h1>Another example headline.</h1>
@@ -192,23 +193,13 @@
     <input id="token" type="text" value="token">
   </div>
   <p></p>
-  <div>ID:
-    <input id="id" type="text" value="id">
-  </div>
-  <p></p>
-  <p></p>
-  <input type="button" id="list" value="list">
-  <input type="button" id="create" value="create">
-  <input type="button" id="show" value="show">
-  <input type="button" id="edit" value="edit">
 
   <p></p>
   <p></p>
 
   <h4>User</h4>
     <div>
-     <input id="username" placeholder="username">
-     <input id="user-password" type="password" placeholder="password">
+
      <input id="user-id" placeholder="user-id">
 
      <button id="create a usah">Create</button>

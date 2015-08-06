@@ -12,6 +12,10 @@ html {
   text-align: center;
 }
 
+.navbarinputs {
+  margin-top: 15px;
+}
+
 /* Carousel base class */
 .carousel {
   height: 800px;

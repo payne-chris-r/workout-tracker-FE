@@ -16,6 +16,9 @@ $('#login').on('click', function(e){
     method: 'POST'
   }).done(function(data, textStatus, jqXHR){
     $('#token').val(data.token);
+    $("#logout").show();
+    $("#login").hide();
+    $("#user-create").hide();
   }).fail(function(jqXHR, textStatus, errorThrown){
     $('#result').val(errorThrown);
   });
