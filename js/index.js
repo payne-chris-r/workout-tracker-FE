@@ -1,6 +1,46 @@
 
 var api = "http://localhost:3000";
 
+$("#test").click(function() {
+  console.log("You clicked test");
+  //$('#runstable')[0].scrollIntoView({behavior: "smooth", block: "start"});
+  $('body').scrollTo("#runstable", 1700, {offset: {top: -70}});
+});
+
+var runTemplate = function(run) {
+  return "<tr><td>" + run.id + "</td><td>" + run.distance + "</td><td>" + run.time + "</td><td>" + run.speed + "</td><td>" + run.comment + "</td></tr>";
+};
+
+var runHeader = "<table id='testtable' class='table table-striped'><thead> <tr><th>#</th> <th>Distance</th> <th>Time</th> <th>Pace</th> <th>Comment</th></tr></thead>";
+
+$('#show').on('click', function(e){
+  console.log("You clicked show.");
+  $.ajax(api + '/runs',
+  {
+    // dataType: 'json',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + $('#token').val()
+    }
+  }).done(function(data, textStatus, jqXHR){
+    //done
+    console.log("Success!");
+    console.log(JSON.stringify(data));
+
+    var newHTML = runHeader;
+    console.log(data.runs);
+    data.runs.forEach(function(run){
+      newHTML += runTemplate(run);
+    });
+    newHTML += "</table>";
+    $("#runsSection").html(newHTML);
+
+  }).fail(function(jqXHR, textStatus, errorThrown){
+    //fail
+    $('#result').val(errorThrown);
+  });
+});
+
 $('#login').on('click', function(e){
   $.ajax( api + '/login',
   {
@@ -19,6 +59,7 @@ $('#login').on('click', function(e){
     $("#logout").show();
     $("#login").hide();
     $("#user-create").hide();
+    $('body').scrollTo("#runstable", 1700, {offset: {top: -70}});
   }).fail(function(jqXHR, textStatus, errorThrown){
     $('#result').val(errorThrown);
   });

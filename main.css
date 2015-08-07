@@ -16,6 +16,19 @@ html {
   margin-top: 15px;
 }
 
+.table-responsive {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.sub-header {
+  padding-left: 50px;
+}
+/*
+.sub-header > h2 {
+  background-color: gray;
+}*/
+
 /* Carousel base class */
 .carousel {
   height: 800px;

@@ -31,6 +31,12 @@
 
   <body>
 
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js" defer charset="utf-8"></script>
+  <!-- <script type="text/javascript" src="js/resource-watcher-0.1.0.js" defer charset="utf-8"></script> -->
+  <script type="text/javascript" src="js/jquery.scrollTo.min.js" defer charset="utf-8"></script>
+
+  <script type="text/javascript" src="js/index.js" defer charset="utf-8"></script>
+
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top"> <!--style="visibility: hidden;"-->
       <div class="container">
@@ -65,6 +71,9 @@
             <li class="navbarinputs"><input id="username" placeholder="username"></li>
             <li class="navbarinputs"><input id="user-password" type="password" placeholder="password"></li>
             <li><a><input type="button" id="logout" value="Logout" style="display:none;"></a></li>
+
+            <li><a><input type="button" id="test" value="TEST"></a></li>
+
             <li><a><input type="button" id="login" value="Login"></a></li>
             <li><a><input type="button" id="user-create" value="Create User"></a></li>
           </ul>
@@ -171,17 +180,10 @@
       </div><!-- /.row -->
 
     </div><!--container marketing-->
+    <h2 id="runstable" class="sub-header">Your Stats</h2>
+          <div id="runsSection" class="table-responsive">
 
-    <!doctype html>
-<html>
-<head>
-  <title>Workout Tracker</title>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js" defer charset="utf-8"></script>
-  <!-- <script type="text/javascript" src="js/resource-watcher-0.1.0.js" defer charset="utf-8"></script> -->
-  <script type="text/javascript" src="js/index.js" defer charset="utf-8"></script>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+          </div>
   <div>
     <!-- <input id="username" type="text" placeholder="email">
     <input id="password" type="password" placeholder="password">
@@ -189,6 +191,7 @@
     -->
   </div>
   <p></p>
+  <button id="show">SHOW</button>
   <div>JRR Token:
     <input id="token" type="text" value="token">
   </div>
@@ -202,7 +205,7 @@
 
      <input id="user-id" placeholder="user-id">
 
-     <button id="create a usah">Create</button>
+
      <button id="user-update">Update</button>
      <button id="user-destroy">Destroy</button>
      <button id="user-display">Display</button>
@@ -269,18 +272,8 @@
   <div>
     <textarea id="comment"></textarea>
   </div>
-</body>
-</html>
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <footer class="footer">
+<footer class="footer">
         <div class="container">
           <p></p>
           <p></p>
