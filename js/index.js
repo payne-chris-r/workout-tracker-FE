@@ -2,20 +2,7 @@
 var api = "http://localhost:3000";
 
 $("#test").click(function() {
-  console.log("You clicked test");
-  //$('#runstable')[0].scrollIntoView({behavior: "smooth", block: "start"});
-  $('body').scrollTo("#runstable", 1700, {offset: {top: -70}});
-});
-
-var runTemplate = function(run) {
-  return "<tr><td>" + run.id + "</td><td>" + run.distance + "</td><td>" + run.time + "</td><td>" + run.speed + "</td><td>" + run.comment + "</td></tr>";
-};
-
-var runHeader = "<table id='testtable' class='table table-striped'><thead> <tr><th>#</th> <th>Distance</th> <th>Time</th> <th>Pace</th> <th>Comment</th></tr></thead>";
-
-$('#show').on('click', function(e){
-  console.log("You clicked show.");
-  $.ajax(api + '/runs',
+  $.ajax(api + '/users/' ,
   {
     // dataType: 'json',
     method: 'GET',
@@ -27,6 +14,49 @@ $('#show').on('click', function(e){
     console.log("Success!");
     console.log(JSON.stringify(data));
 
+  }).fail(function(jqXHR, textStatus, errorThrown){
+    //fail
+    $('#result').val(errorThrown);
+  });
+  //$('#runstable')[0].scrollIntoView({behavior: "smooth", block: "start"});
+  // $('body').scrollTo("#newRun", 1700, {offset: {top: -70}});
+});
+
+$("#runsNavBar").click(function() {
+  console.log("You clicked runs");
+  renderTotals();
+  //$('#runstable')[0].scrollIntoView({behavior: "smooth", block: "start"});
+  $('body').scrollTo("#runstable", 1700, {offset: {top: -70}});
+});
+
+var runTemplate = function(run) {
+  return "<tr><td>" + run.id + "</td><td>" + run.distance + "</td><td>" + run.time + "</td><td>" + run.speed + "</td><td>" + run.comment + "</td></tr>";
+};
+
+var totalDistanceTemplate = function(user){
+  return "<div id='distance'><h2>Distance</h2><p>Furthest Run: " + user.total_run_distance + "</p><p>Total Distance: " + user.total_run_distance + "</p><p>Average Distance: " + user.total_run_distance + "</p></div>";
+};
+
+var totalTimeTemplate = function(user){
+  return "<div id='time'><h2>Time</h2><p>Longest Run: " + user + "</p><p>Total Time Spent: " + user + "</p><p>Average Duration: " + user + "</p></div>";
+};
+
+var totalPaceTemplate = function(user){
+  return "<div id='pace'><h2>Pace</h2><p>Fastest Run: " + user + "</p><p>Average Pace: " + user + "</p></div>";
+};
+
+var renderRuns = function(){
+  $.ajax(api + '/runs',
+  {
+    // dataType: 'json',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + $('#token').val()
+    }
+  }).done(function(data, textStatus, jqXHR){
+    //done
+    console.log("Success!");
+    console.log(JSON.stringify(data));
     var newHTML = runHeader;
     console.log(data.runs);
     data.runs.forEach(function(run){
@@ -34,12 +64,33 @@ $('#show').on('click', function(e){
     });
     newHTML += "</table>";
     $("#runsSection").html(newHTML);
-
   }).fail(function(jqXHR, textStatus, errorThrown){
     //fail
     $('#result').val(errorThrown);
   });
-});
+};
+
+var renderTotals = function(id) {
+  $.ajax(api + '/users/' + id,
+  {
+    //dataType: 'json',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + $('#token').val()
+    }
+  }).done(function(data, textStatus, jqXHR){
+    console.log(data.user.total_run_distance);
+    var newHTML = '';
+    newHTML += totalDistanceTemplate(data.user);
+    $("#distance").html(newHTML);
+    console.log(totalDistanceTemplate(data.user));
+  }).fail(function(jqXHR, textStatus, errorThrown){
+    //fail
+    $('#result').val(errorThrown);
+  });
+};
+
+var runHeader = "<table id='testtable' class='table table-striped'><thead> <tr><th>#</th> <th>Distance</th> <th>Time</th> <th>Pace</th> <th>Comment</th></tr></thead>";
 
 $('#login').on('click', function(e){
   $.ajax( api + '/login',
@@ -55,11 +106,16 @@ $('#login').on('click', function(e){
     dataType: 'json',
     method: 'POST'
   }).done(function(data, textStatus, jqXHR){
-    $('#token').val(data.token);
+    $('#token').val(data.user.token);
+    //simpleStorage.set('token',data.token);
     $("#logout").show();
     $("#login").hide();
     $("#user-create").hide();
-    $('body').scrollTo("#runstable", 1700, {offset: {top: -70}});
+    renderRuns();
+    currentUserID = data.user.id;
+    console.log("Your user id is " + currentUserID);
+    renderTotals(currentUserID);
+    $('body').scrollTo("#newRun", 1700, {offset: {top: -70}});
   }).fail(function(jqXHR, textStatus, errorThrown){
     $('#result').val(errorThrown);
   });
@@ -81,12 +137,14 @@ $("#run-create").on('click', function(){
         speed: pace,
         comment: $("#run-comment").val(),
         date: $("#run-date").val(),
-        rating: $("#run-rating").val(),
-        user_id: $("#user-id").val()
+        rating: $("#run-rating").val()
       }
     }
   }).done(function(data){
     console.log("I'm a robot that created a run.");
+    renderRuns();
+    $('body').scrollTo("#runstable", 1700, {offset: {top: -70}});
+
   }).fail(function(data){
     console.log("YOU DONE FUCKED UP NOW!");
   });

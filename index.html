@@ -35,6 +35,7 @@
   <!-- <script type="text/javascript" src="js/resource-watcher-0.1.0.js" defer charset="utf-8"></script> -->
   <script type="text/javascript" src="js/jquery.scrollTo.min.js" defer charset="utf-8"></script>
 
+  <script type="text/javascript" src="bower_components/simpleStorage/simpleStorage.js"></script>
   <script type="text/javascript" src="js/index.js" defer charset="utf-8"></script>
 
     <!-- Fixed navbar -->
@@ -53,7 +54,7 @@
           <ul class="nav navbar-nav">
             <li class="active" id="home-button"><a>Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#contact">Runs</a></li>
+            <li><a id="runsNavBar" href="#runs">Runs</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Goals<span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -71,9 +72,8 @@
             <li class="navbarinputs"><input id="username" placeholder="username"></li>
             <li class="navbarinputs"><input id="user-password" type="password" placeholder="password"></li>
             <li><a><input type="button" id="logout" value="Logout" style="display:none;"></a></li>
-
+            <li><a><input type="button" id="runNavBarButton" value="Add a Run"></a></li>
             <li><a><input type="button" id="test" value="TEST"></a></li>
-
             <li><a><input type="button" id="login" value="Login"></a></li>
             <li><a><input type="button" id="user-create" value="Create User"></a></li>
           </ul>
@@ -153,37 +153,86 @@
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
     <div class="container marketing">
+    <h2 id="newRun" class="sub-header">Add a New Run</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Distance</th>
+                <th>Time</th>
+                <th>Comment</th>
+                <th>Rating</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input size="15" id="run-date" placeholder="date"></td>
+                <td><input size="12" id="run-distance" placeholder="miles"></td>
+                <td><input id="run-time" placeholder="minutes"></td>
+                <td><input size="30" id="run-comment" placeholder="comment"></td>
+                <td><input id="run-rating" placeholder="rating"></td>
+                <td><button id="run-create">Create</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
           <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Distance</h2>
-          <p>Your furthest distance travelled in one run is: </p>
-          <p>Your total distance travelled is: </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <div id="distance">
+            <h2>Distance</h2>
+            <p>Furthest Run</p>
+            <p>Total Distance</p>
+            <p>Average Distance</p>
+          </div>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Time</h2>
-          <p>Your longest run was: </p>
-          <p>Your total time logged with WT is: </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <div id="time">
+            <h2>Time</h2>
+            <p>Longest Run</p>
+            <p>Total Time Spent</p>
+            <p>Average Duration</p>
+          </div>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Pace</h2>
-          <p>Your fastest pace recorded was: </p>
-          <p>and was recorded during a ###REPLACE ME### mile run.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <div id="pace">
+            <h2>Pace</h2>
+            <p>Fastest Run</p>
+            <p>Average Pace</p>
+          </div>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
-
     </div><!--container marketing-->
-    <h2 id="runstable" class="sub-header">Your Stats</h2>
-          <div id="runsSection" class="table-responsive">
-
-          </div>
+       <h2 id="runstable" class="sub-header">Your Stats</h2>
+        <div id="runsSection" class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Distance</th>
+                <th>Time</th>
+                <th>Pace</th>
+                <th>Comment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>You</td>
+                <td>Need</td>
+                <td>to</td>
+                <td>Login</td>
+                <td>Homie</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
   <div>
     <!-- <input id="username" type="text" placeholder="email">
     <input id="password" type="password" placeholder="password">
@@ -191,6 +240,7 @@
     -->
   </div>
   <p></p>
+  <div id="hide-me" style="display:none">
   <button id="show">SHOW</button>
   <div>JRR Token:
     <input id="token" type="text" value="token">
@@ -242,7 +292,7 @@
      <input id="run-date" placeholder="date">
      <input id="run-rating" placeholder="rating">
 
-     <button id="run-create">Create</button>
+
      <button id="run-update">Update</button>
      <button id="run-destroy">Destroy</button>
      <button id="run-display">Display</button>
@@ -272,7 +322,8 @@
   <div>
     <textarea id="comment"></textarea>
   </div>
-
+</div>
+<!-- Close hide me div -->
 <footer class="footer">
         <div class="container">
           <p></p>
