@@ -29,20 +29,43 @@ $("#runsNavBar").click(function() {
   $('body').scrollTo("#runstable", 1700, {offset: {top: -70}});
 });
 
+$("#runNavBarButton").click(function() {
+  console.log("You clicked runs");
+  renderTotals();
+  //$('#runstable')[0].scrollIntoView({behavior: "smooth", block: "start"});
+  $('body').scrollTo("#newRun", 1700, {offset: {top: -70}});
+});
+
+
+
 var runTemplate = function(run) {
   return "<tr><td>" + run.id + "</td><td>" + run.distance + "</td><td>" + run.time + "</td><td>" + run.speed + "</td><td>" + run.comment + "</td></tr>";
 };
 
+var totalsTemplate = function(user){
+  var newHTML = '';
+  newHTML += totalDistanceTemplate(user);
+  $("#distance").html(newHTML);
+
+  newHTML = '';
+  newHTML += totalTimeTemplate(user);
+  $("#time").html(newHTML);
+
+  newHTML = '';
+  newHTML += totalPaceTemplate(user);
+  $("#pace").html(newHTML);
+};
+
 var totalDistanceTemplate = function(user){
-  return "<div id='distance'><h2>Distance</h2><p>Furthest Run: " + user.total_run_distance + "</p><p>Total Distance: " + user.total_run_distance + "</p><p>Average Distance: " + user.total_run_distance + "</p></div>";
+  return "<div id='distance'><h2>Distance</h2><p>Furthest Run: " + user.furthest_run + " miles</p><p>Total Distance: " + user.total_run_distance + " miles</p><p>Average Distance: " + user.average_distance + " miles</p></div>";
 };
 
 var totalTimeTemplate = function(user){
-  return "<div id='time'><h2>Time</h2><p>Longest Run: " + user + "</p><p>Total Time Spent: " + user + "</p><p>Average Duration: " + user + "</p></div>";
+  return "<div id='time'><h2>Time</h2><p>Longest Run: " + user.longest_run + " minutes</p><p>Total Time Spent: " + user.total_run_time + " minutes</p><p>Average Duration: " + user.average_duration + " minutes</p></div>";
 };
 
 var totalPaceTemplate = function(user){
-  return "<div id='pace'><h2>Pace</h2><p>Fastest Run: " + user + "</p><p>Average Pace: " + user + "</p></div>";
+  return "<div id='pace'><h2>Pace</h2><p>Fastest Run: " + user.fastest_run + " minute miles</p><p>Average Pace: " + user.average_pace + " minute miles</p></div>";
 };
 
 var renderRuns = function(){
@@ -79,10 +102,11 @@ var renderTotals = function(id) {
       Authorization: 'Token token=' + $('#token').val()
     }
   }).done(function(data, textStatus, jqXHR){
-    console.log(data.user.total_run_distance);
-    var newHTML = '';
-    newHTML += totalDistanceTemplate(data.user);
-    $("#distance").html(newHTML);
+    // console.log(data.user.total_run_distance);
+    // var newHTML = '';
+    // newHTML += totalDistanceTemplate(data.user);
+    // $("#distance").html(newHTML);
+    totalsTemplate(data.user);
     console.log(totalDistanceTemplate(data.user));
   }).fail(function(jqXHR, textStatus, errorThrown){
     //fail
@@ -144,7 +168,7 @@ $("#run-create").on('click', function(){
     console.log("I'm a robot that created a run.");
     renderRuns();
     $('body').scrollTo("#runstable", 1700, {offset: {top: -70}});
-
+    renderTotals(currentUserID);
   }).fail(function(data){
     console.log("YOU DONE FUCKED UP NOW!");
   });
