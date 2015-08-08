@@ -139,7 +139,7 @@ $('#login').on('click', function(e){
     currentUserID = data.user.id;
     console.log("Your user id is " + currentUserID);
     renderTotals(currentUserID);
-    $('body').scrollTo("#newRun", 1700, {offset: {top: -70}});
+    $('body').scrollTo("#newRun", 1700, {offset: {top: -70, left: -100}});
   }).fail(function(jqXHR, textStatus, errorThrown){
     $('#result').val(errorThrown);
   });
