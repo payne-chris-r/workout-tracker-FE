@@ -1,6 +1,10 @@
 
 var api = "http://localhost:3000";
 
+// $(function(){
+//   $('.myCarousel').carousel();
+// });
+
 $("#test").click(function() {
   $.ajax(api + '/users/' ,
   {
@@ -229,8 +233,7 @@ $("#run-destroy").on('click', function(){
   //   });
   // });
 
-// create Run with Ajax
-$("#user-create").on('click', function(){
+var createUser = function(){
   $.ajax({
     url: api + '/users',
     method: 'POST',
@@ -245,7 +248,26 @@ $("#user-create").on('click', function(){
   }).fail(function(data){
     console.log("YOU DONE FUCKED UP NOW!");
   });
+};
+
+// create user with Ajax
+$("#user-create").on('click', function(){
+  createUser();
 });
+
+$("#sign-up-button").on('click', function(){
+  createUser();
+});
+
+$("#sign-up-button1").on('click', function(){
+  createUser();
+});
+
+$("#sign-up-button2").on('click', function(){
+  createUser();
+});
+
+
 
 //update user with Ajax
 $("#user-update").on('click', function(){
