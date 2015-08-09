@@ -6,6 +6,7 @@ body {
 html {
   position: relative;
   min-height: 100%;
+
 }
 
 .jumbotron {
@@ -22,7 +23,7 @@ html {
 }
 
 .sub-header {
-  padding-left: 50px;
+  padding-left: 40px;
 }
 /*
 .sub-header > h2 {
@@ -32,26 +33,28 @@ html {
 /* Carousel base class */
 .carousel {
   height: 800px;
-  width: 1400px;
+  width: 100%;
   margin-bottom: 60px;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   z-index: 10;
-  margin-bottom: 60px;
+  margin-bottom: 75px;
 }
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 800px;
+
   background-color: #777;
 }
 .carousel-inner > .item > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1500px;
-  height: 800px;
+  /*position: absolute;*/
+  /*top: 0;
+  left: 0;*/
+  margin: auto;
+  /*width: 1500px;
+  height: 800px;*/
 }
 
 .footer {
