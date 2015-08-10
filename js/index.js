@@ -22,25 +22,7 @@ $("#test").click(function() {
     //fail
     $('#result').val(errorThrown);
   });
-  //$('#runstable')[0].scrollIntoView({behavior: "smooth", block: "start"});
-  // $('body').scrollTo("#newRun", 1700, {offset: {top: -70}});
 });
-
-$("#runsNavBar").click(function() {
-  console.log("You clicked runs");
-  renderTotals();
-  //$('#runstable')[0].scrollIntoView({behavior: "smooth", block: "start"});
-  $('body').scrollTo("#runstable", 1700, {offset: {top: -70}});
-});
-
-$("#runNavBarButton").click(function() {
-  console.log("You clicked runs");
-  renderTotals();
-  //$('#runstable')[0].scrollIntoView({behavior: "smooth", block: "start"});
-  $('body').scrollTo("#newRun", 1700, {offset: {top: -70}});
-});
-
-
 
 var runTemplate = function(run) {
   return "<tr><td>" + run.id + "</td><td>" + run.distance + "</td><td>" + run.time + "</td><td>" + run.speed + "</td><td>" + run.comment + "</td></tr>";

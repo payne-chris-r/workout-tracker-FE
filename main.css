@@ -63,7 +63,9 @@ html {
   height: 800px;*/
 }
 
-
+#runsSection {
+  margin-bottom: 100px;
+}
 
 .footer {
   position: absolute;
