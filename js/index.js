@@ -1,5 +1,5 @@
 
-var api = "http://localhost:3000";
+var api = "https://stark-springs-1033.herokuapp.com";
 
 $("#test").click(function() {
   $.ajax(api + '/users/' ,
