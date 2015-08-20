@@ -1,5 +1,5 @@
 
-var api = "http://localhost:3000";
+var api = "https://stark-springs-1033.herokuapp.com";
 
 // $(function(){
 //   $('.myCarousel').carousel();
@@ -134,6 +134,7 @@ $('#login').on('click', function(e){
 // create Run with Ajax
 $("#run-create").on('click', function(){
   var pace = (($("#run-time").val()) / ($("#run-distance").val()));
+  //round this shit /\ using pace.toFixed(2); NOPE! Do it in the display, not in the data entry. Computer doesn't care about sig figs, just display does!
   $.ajax({
     url: api + '/runs',
     method: 'POST',
